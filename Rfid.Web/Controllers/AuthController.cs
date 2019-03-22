@@ -152,7 +152,7 @@ namespace Rfid.Web.Controllers
                     new Claim(ClaimTypes.Name, user.UserName),
                     //new Claim(ClaimTypes.Role, list),
                     //new Claim(ClaimTypes.Role, "Admin"),
-                    //new Claim(ClaimTypes.Role, "Manager")
+                    //new Claim(ClaimTypes.Role, "Manager")///
                     
 
 
