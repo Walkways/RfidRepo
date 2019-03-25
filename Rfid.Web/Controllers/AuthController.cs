@@ -52,15 +52,15 @@ namespace Rfid.Web.Controllers
             //var querytest2 = querytest.ToList();
             //var tmp3 = querytest2.Count;
 
-            
+
 
             //var querytestx = from RfidContext in _context.Users
-                            // where RfidContext.Nom == user.UserName
-                           // select RfidContext.Nom;
+            // where RfidContext.Nom == user.UserName
+            // select RfidContext.Nom;
 
             //var querytestx = from RfidContext in _context.Users
-                            // where RfidContext.Nom == "Shields"
-                            // select RfidContext.Nom;
+            // where RfidContext.Nom == "Shields"
+            // select RfidContext.Nom;
 
 
 
@@ -75,6 +75,10 @@ namespace Rfid.Web.Controllers
             //var tmp4 = query4.Count;
 
 
+            
+            
+
+
             var query = from RfidContext in _context.Users
                         where RfidContext.Email == user.UserMail                        
                         select RfidContext.Nom; // check corespondance mail/mdp
@@ -85,12 +89,20 @@ namespace Rfid.Web.Controllers
                         select RfidContext.Passe;
             
 
+
             var query3 = from RfidContext in _context.Users
                          where RfidContext.Email == user.UserMail                         
                          select RfidContext.IdUsers; // recupere l'id
 
+            
+
             var tmp = query3.ToList();
-            var id = tmp[0]; // recuperé l'id pour, plus tars, racueprer les roles assiciés
+            var id = tmp[0]; // recuperé l'id pour, plus tars, racueprer les roles associés
+
+            // Implementer l'uitlisation de:
+            //Users mon_user = _context.Users.Find(id);
+
+
 
 
 
