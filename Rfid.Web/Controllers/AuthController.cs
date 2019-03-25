@@ -35,6 +35,10 @@ namespace Rfid.Web.Controllers
                 return BadRequest("Invalid client request");
             }
 
+            //fonctio test a supprime apres test
+
+            //TestCrypt.test();
+
             /*Users users = new Users();
             users.Nom = user.UserName;
             users.Passe = user.Password;
@@ -72,17 +76,21 @@ namespace Rfid.Web.Controllers
 
 
             var query = from RfidContext in _context.Users
-                        where RfidContext.Email == user.UserMail
-                        where RfidContext.Passe == user.Password
-                        select RfidContext.Nom;
+                        where RfidContext.Email == user.UserMail                        
+                        select RfidContext.Nom; // check corespondance mail/mdp
+
+            
+            var query4 = from RfidContext in _context.Users
+                        where RfidContext.Email == user.UserMail                        
+                        select RfidContext.Passe;
+            
 
             var query3 = from RfidContext in _context.Users
-                         where RfidContext.Email == user.UserMail
-                         where RfidContext.Passe == user.Password
-                         select RfidContext.IdUsers;
+                         where RfidContext.Email == user.UserMail                         
+                         select RfidContext.IdUsers; // recupere l'id
 
             var tmp = query3.ToList();
-            var id = tmp[0];
+            var id = tmp[0]; // recuperé l'id pour, plus tars, racueprer les roles assiciés
 
 
 
@@ -97,7 +105,7 @@ namespace Rfid.Web.Controllers
                        where UsersAppRole.IdUsers == id
                        select  RfidContext.Nom;
 
-            var list = query2.ToList();
+            var list = query2.ToList();  // recuperre la liste de roles
 
             /*var query2 = from RfidContext in _context.Users
                          where RfidContext.Passe == user.Password
@@ -124,8 +132,20 @@ namespace Rfid.Web.Controllers
             //var mdp2 = mdp[0];
 
             //if (username.Count != 0 && mdp.Count != 0)
-             if (username.Count != 0)
-                {
+
+            var tmp_hashedPassword = query4.ToList();
+            var hashedPassword = tmp_hashedPassword[0];
+            bool validPassword = false;
+            var submittedPassword = user.Password;
+
+            
+                // check the password using bcrypt
+                validPassword = BCrypt.Net.BCrypt.Verify(submittedPassword, hashedPassword);
+            
+
+            //if (username.Count != 0)
+            if (validPassword)
+            {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
