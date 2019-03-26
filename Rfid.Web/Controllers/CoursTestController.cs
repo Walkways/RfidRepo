@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace Rfid.Web.Controllers
 
         // GET: api/CoursTest
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<Cours>>> GetCours()
         {
             
@@ -32,6 +34,7 @@ namespace Rfid.Web.Controllers
 
         // GET: api/CoursTest/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Cours>> GetCours(int id)
         {
             var cours = await _context.Cours.FindAsync(id);
@@ -46,6 +49,7 @@ namespace Rfid.Web.Controllers
 
         // PUT: api/CoursTest/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCours(int id, Cours cours)
         {
             if (id != cours.IdCours)
@@ -76,6 +80,7 @@ namespace Rfid.Web.Controllers
 
         // POST: api/CoursTest
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Cours>> PostCours(Cours cours)
         {
             _context.Cours.Add(cours);

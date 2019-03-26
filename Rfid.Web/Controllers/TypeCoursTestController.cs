@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -83,9 +84,11 @@ namespace Rfid.Web.Controllers
 
         // DELETE: api/TypeCoursTest/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<TypeCours>> DeleteTypeCours(int id)
         {
             var typeCours = await _context.TypeCours.FindAsync(id);
+            
             if (typeCours == null)
             {
                 return NotFound();
