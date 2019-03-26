@@ -144,6 +144,8 @@ namespace Rfid.Web.Models
                 entity.HasKey(e => e.IdCours)
                     .HasName("cours_PK");
 
+                
+
                 entity.ToTable("cours");
 
                 entity.Property(e => e.IdCours).HasColumnName("id_cours");
@@ -160,12 +162,14 @@ namespace Rfid.Web.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+
+
                 entity.Property(e => e.MaxParticipant).HasColumnName("max_participant");
 
                 entity.HasOne(d => d.TypeCours)
                     .WithMany(p => p.Cours)
                     .HasForeignKey(d => d.IdTypeCours)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("cours_type_cours_FK");
             });
 

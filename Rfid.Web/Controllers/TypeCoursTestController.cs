@@ -84,7 +84,7 @@ namespace Rfid.Web.Controllers
 
         // DELETE: api/TypeCoursTest/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<TypeCours>> DeleteTypeCours(int id)
         {
             var typeCours = await _context.TypeCours.FindAsync(id);

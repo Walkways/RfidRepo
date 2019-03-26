@@ -49,7 +49,7 @@ namespace Rfid.Web.Controllers
 
         // PUT: api/CoursTest/5
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutCours(int id, Cours cours)
         {
             if (id != cours.IdCours)
