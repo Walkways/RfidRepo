@@ -100,10 +100,10 @@ namespace Rfid.Web.Controllers
         ///
         ///     POST /api/CoursTest
         ///     {
-        ///        "IdCours": 1,
+        ///        "IdCours": 1,  //facultatif
         ///        "Libelle": "Libelle1",
         ///        "MaxParticipant": 30,
-        ///        "Date": 01/01/2019,
+        ///        "Date": "01/01/2019",
         ///        "IdTypeCours": 2
         ///     }
         ///
