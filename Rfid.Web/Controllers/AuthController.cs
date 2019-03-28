@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Rfid.Web.Models;
 
+
 namespace Rfid.Web.Controllers
 {
     [Route("api/[controller]")]
@@ -20,12 +21,14 @@ namespace Rfid.Web.Controllers
         //private readonly UserContext _context;
 
         private readonly RfidContext _context;
+        
 
         public AuthController(RfidContext context)
         {
             _context = context;
         }
 
+        
         // GET api/values
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody]LoginModel user)
@@ -208,6 +211,6 @@ namespace Rfid.Web.Controllers
 
             
         }
-
+        
     }
 }
