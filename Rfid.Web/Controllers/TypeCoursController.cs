@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Rfid.Web.Models;
 using Rfid.Web.Models.DataManager;
 using Rfid.Web.Models.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Rfid.Web.Controllers
 {
