@@ -9,6 +9,9 @@ using Rfid.Web.Extensions;
 using Rfid.Web.Models;
 using Rfid.Web.Models.DataManager;
 using Rfid.Web.Models.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Rfid.Web
 {
@@ -30,7 +33,23 @@ namespace Rfid.Web
             services.AddDbContext<RfidContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:RfidDB"]));
             services.AddScoped<IDataRepository<Cours, CoursDto>, CoursDataManager>();
             services.AddScoped<IDataRepository<TypeCours, TypeCoursDto>, TypeCoursDataManager>();
-            
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = "http://localhost:5000",
+                    ValidAudience = "http://localhost:5000",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                };
+            });
+
 
             services.AddMvc()
                 .AddJsonOptions(
@@ -50,6 +69,8 @@ namespace Rfid.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
          
