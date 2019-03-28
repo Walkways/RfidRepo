@@ -23,9 +23,9 @@ namespace Rfid.Web.Controllers
             _context = context;
         }
 
-        
 
-        
+
+        #region snippet_GetCours
         // GET: api/CoursTest
         [HttpGet]
         [Authorize(Roles = "admin")]
@@ -36,10 +36,11 @@ namespace Rfid.Web.Controllers
 
             return await _context.Cours.ToListAsync();
         }
-        
-        
+        #endregion snippet_GetCours
 
-        
+
+
+
         // GET: api/CoursTest/5
         [HttpGet("{id}")]
         //[Authorize(Roles = "admin")]

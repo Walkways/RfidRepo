@@ -23,6 +23,7 @@ namespace Rfid.Web.Controllers
 
         // GET: api/TypeCoursTest
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<TypeCours>>> GetTypeCours()
         {
             return await _context.TypeCours.ToListAsync();
