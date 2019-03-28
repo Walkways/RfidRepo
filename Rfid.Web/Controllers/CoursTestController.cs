@@ -23,7 +23,7 @@ namespace Rfid.Web.Controllers
 
         // GET: api/CoursTest
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<Cours>>> GetCours()
         {
             
@@ -34,7 +34,7 @@ namespace Rfid.Web.Controllers
 
         // GET: api/CoursTest/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<Cours>> GetCours(int id)
         {
             var cours = await _context.Cours.FindAsync(id);
