@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rfid.Web.Models;
 
+#region snippet_CoursTestController
 namespace Rfid.Web.Controllers
 {
     [Route("api/[controller]")]
@@ -15,15 +16,19 @@ namespace Rfid.Web.Controllers
     public class CoursTestController : ControllerBase
     {
         private readonly RfidContext _context;
+        #endregion snippet_CoursTestController
 
         public CoursTestController(RfidContext context)
         {
             _context = context;
         }
 
+        
+
+        
         // GET: api/CoursTest
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<IEnumerable<Cours>>> GetCours()
         {
             
@@ -31,10 +36,13 @@ namespace Rfid.Web.Controllers
 
             return await _context.Cours.ToListAsync();
         }
+        
+        
 
+        
         // GET: api/CoursTest/5
         [HttpGet("{id}")]
-        //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<Cours>> GetCours(int id)
         {
             var cours = await _context.Cours.FindAsync(id);
@@ -46,7 +54,10 @@ namespace Rfid.Web.Controllers
 
             return cours;
         }
+        
 
+
+        #region snippet_PutCours
         // PUT: api/CoursTest/5
         [HttpPut("{id}")]
         //[Authorize(Roles = "Admin")]
@@ -77,7 +88,9 @@ namespace Rfid.Web.Controllers
 
             return NoContent();
         }
+        #endregion snippet_PutCours
 
+        #region snippet_PostCours
         // POST: api/CoursTest
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -101,7 +114,10 @@ namespace Rfid.Web.Controllers
 
             return CreatedAtAction("GetCours", new { id = cours.IdCours }, cours);
         }
+        #endregion snippet_PostCours
 
+
+        #region snippet_DeleteCours
         // DELETE: api/CoursTest/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Cours>> DeleteCours(int id)
@@ -117,6 +133,7 @@ namespace Rfid.Web.Controllers
 
             return cours;
         }
+        #endregion snippet_DeleteCours
 
         private bool CoursExists(int id)
         {
