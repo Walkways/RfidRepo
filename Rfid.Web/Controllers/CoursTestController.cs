@@ -92,9 +92,30 @@ namespace Rfid.Web.Controllers
         #endregion snippet_PutCours
 
         #region snippet_PostCours
+        /// <summary>
+        /// Creates a Cours.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /api/CoursTest
+        ///     {
+        ///        "IdCours": 1,
+        ///        "Libelle": "Libelle1",
+        ///        "MaxParticipant": 30,
+        ///        "Date": 01/01/2019,
+        ///        "IdTypeCours": 2
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="item"></param>
+        /// <returns>A newly created Cours</returns>
+        /// <response code="201">Returns the newly created Cours</response>
+        /// <response code="400">If the item is null</response>  
+        /// 
         // POST: api/CoursTest
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Cours>> PostCours(Cours cours)
         {
             _context.Cours.Add(cours);

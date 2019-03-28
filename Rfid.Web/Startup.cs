@@ -19,6 +19,9 @@ using System.Text;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System;
+using System.IO;
 
 namespace Rfid.Web
 {
@@ -79,7 +82,14 @@ namespace Rfid.Web
                 c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
                 { "Bearer", Enumerable.Empty<string>() },
                 });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+
+
 
             
         }
