@@ -75,7 +75,29 @@ namespace Rfid.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<Users>> PostUsers(Users users)
         {
+            users.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);            
+
+            _context.Adresse.Add(users.IdAdresseNavigation);
+
+            users.IdAdresse = users.IdAdresseNavigation.IdAdresse;
             _context.Users.Add(users);
+
+            ////////////////////////////////////////////////////////////
+
+            //Users usr = new Users();
+            //usr  = _context.Users.Find(users);
+            //usr.IdUsers;
+
+
+
+            //Adresse adr = new Adresse();
+            //adr = _context.Adresse.Find(users.IdAdresseNavigation);
+            //adr.IdAdresse;
+            //////////////////////////////////////////////////////
+            
+
+            
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUsers", new { id = users.IdUsers }, users);
