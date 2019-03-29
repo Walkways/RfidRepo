@@ -41,7 +41,7 @@ namespace Rfid.Web.Models
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder
                     .UseLazyLoadingProxies()
-                    .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Rfid2;Trusted_Connection=True;");
+                    .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=RfidDB;Trusted_Connection=True;");
             }
         }
 
