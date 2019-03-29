@@ -50,8 +50,52 @@ namespace Rfid.Web.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(users).State = EntityState.Modified;
+            //_context.Entry(users).State = EntityState.Modified;
 
+            var Mon_usr = await _context.Users.FindAsync(id);
+            //Mon_usr.Nom = users.Nom;
+            Mon_usr.Nom = "lala";
+            //Mon_usr.Prenom = users.Prenom;
+            //Mon_usr.Passe = users.Passe;
+            //Mon_usr.Tel = users.Tel;
+            //Mon_usr.Email = users.Email;
+            //Mon_usr.Actif = users.Actif;
+
+            await _context.SaveChangesAsync();
+            /*
+            var adresse = await _context.Adresse.FindAsync(Mon_usr.IdAdresse);
+            adresse.Libelle = users.IdAdresseNavigation.Libelle;
+            adresse.Complement = users.IdAdresseNavigation.Complement;
+            adresse.Cp = users.IdAdresseNavigation.Cp;
+            adresse.Ville = users.IdAdresseNavigation.Ville;
+
+
+            await _context.SaveChangesAsync();*/
+
+
+
+
+            //_context.Users.Update(Mon_usr);
+            //users.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
+            //Mon_usr=   users;
+            //var adresse = await _context.Adresse.FindAsync(Mon_usr.IdAdresse);
+
+            //users.IdAdresse = adresse.IdAdresse;
+            //users.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
+            //Mon_usr = users;            
+            //Mon_usr.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
+
+
+            //adresse = users.IdAdresseNavigation;
+
+            //_context.Users.Update(Mon_usr);
+            //_context.Adresse.Update(adresse);
+
+
+            //await _context.SaveChangesAsync();
+
+
+            /*
             try
             {
                 await _context.SaveChangesAsync();
@@ -66,7 +110,7 @@ namespace Rfid.Web.Controllers
                 {
                     throw;
                 }
-            }
+            }*/
 
             return NoContent();
         }
@@ -81,6 +125,8 @@ namespace Rfid.Web.Controllers
 
             users.IdAdresse = users.IdAdresseNavigation.IdAdresse;
             _context.Users.Add(users);
+
+            
 
             ////////////////////////////////////////////////////////////
 
