@@ -104,15 +104,18 @@ namespace Rfid.Web.Controllers
         }
 
         // DELETE: api/Users/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]        
         public async Task<ActionResult<Users>> DeleteUsers(int id)
         {
             var users = await _context.Users.FindAsync(id);
+            var tmp = await _context.Adresse.FindAsync(users.IdAdresse);
             if (users == null)
             {
-                return NotFound();
+             return NotFound();
             }
 
+
+            _context.Adresse.Remove(tmp);
             _context.Users.Remove(users);
             await _context.SaveChangesAsync();
 
