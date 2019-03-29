@@ -43,7 +43,7 @@ namespace Rfid.Web.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, Users users)
+        public async Task<ActionResult<Users>> PutUsers(int id, Users users)
         {
             if (id != users.IdUsers)
             {
@@ -52,17 +52,20 @@ namespace Rfid.Web.Controllers
 
             //_context.Entry(users).State = EntityState.Modified;
 
-            var Mon_usr = await _context.Users.FindAsync(id);
-            //Mon_usr.Nom = users.Nom;
-            Mon_usr.Nom = "lala";
-            //Mon_usr.Prenom = users.Prenom;
-            //Mon_usr.Passe = users.Passe;
-            //Mon_usr.Tel = users.Tel;
-            //Mon_usr.Email = users.Email;
-            //Mon_usr.Actif = users.Actif;
+            var Mon_usr = _context.Users.Find(id);
 
-            await _context.SaveChangesAsync();
-            /*
+            
+
+            Mon_usr.Nom = users.Nom;
+            Mon_usr.Prenom = users.Prenom;
+            Mon_usr.Passe = users.Passe;
+            Mon_usr.Tel = users.Tel;
+            Mon_usr.Email = users.Email;
+            Mon_usr.Actif = users.Actif;
+
+             _context.SaveChanges();
+
+            
             var adresse = await _context.Adresse.FindAsync(Mon_usr.IdAdresse);
             adresse.Libelle = users.IdAdresseNavigation.Libelle;
             adresse.Complement = users.IdAdresseNavigation.Complement;
@@ -70,47 +73,9 @@ namespace Rfid.Web.Controllers
             adresse.Ville = users.IdAdresseNavigation.Ville;
 
 
-            await _context.SaveChangesAsync();*/
+            await _context.SaveChangesAsync();
 
 
-
-
-            //_context.Users.Update(Mon_usr);
-            //users.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
-            //Mon_usr=   users;
-            //var adresse = await _context.Adresse.FindAsync(Mon_usr.IdAdresse);
-
-            //users.IdAdresse = adresse.IdAdresse;
-            //users.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
-            //Mon_usr = users;            
-            //Mon_usr.Passe = BCrypt.Net.BCrypt.HashPassword(users.Passe);
-
-
-            //adresse = users.IdAdresseNavigation;
-
-            //_context.Users.Update(Mon_usr);
-            //_context.Adresse.Update(adresse);
-
-
-            //await _context.SaveChangesAsync();
-
-
-            /*
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UsersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }*/
 
             return NoContent();
         }
