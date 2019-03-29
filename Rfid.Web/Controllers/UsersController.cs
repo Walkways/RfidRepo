@@ -108,14 +108,14 @@ namespace Rfid.Web.Controllers
         public async Task<ActionResult<Users>> DeleteUsers(int id)
         {
             var users = await _context.Users.FindAsync(id);
-            var tmp = await _context.Adresse.FindAsync(users.IdAdresse);
+            var adresse = await _context.Adresse.FindAsync(users.IdAdresse);
             if (users == null)
             {
              return NotFound();
             }
 
 
-            _context.Adresse.Remove(tmp);
+            _context.Adresse.Remove(adresse);
             _context.Users.Remove(users);
             await _context.SaveChangesAsync();
 
