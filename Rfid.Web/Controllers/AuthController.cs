@@ -18,7 +18,7 @@ namespace Rfid.Web.Controllers
     public class AuthController: ControllerBase
     {
 
-        //private readonly UserContext _context;
+        
 
         private readonly RfidContext _context;
         
@@ -38,49 +38,7 @@ namespace Rfid.Web.Controllers
                 return BadRequest("Invalid client request");
             }
 
-            //fonctio test a supprime apres test
-
-            //TestCrypt.test();
-
-            /*Users users = new Users();
-            users.Nom = user.UserName;
-            users.Passe = user.Password;
-
-            var tmp = user.UserName;
-            var tmp2 = user.Password;*/
-
-            //var querytest = from RfidContext in _context.Users                            
-            //select RfidContext.Nom;
-
-            //var querytest2 = querytest.ToList();
-            //var tmp3 = querytest2.Count;
-
-
-
-            //var querytestx = from RfidContext in _context.Users
-            // where RfidContext.Nom == user.UserName
-            // select RfidContext.Nom;
-
-            //var querytestx = from RfidContext in _context.Users
-            // where RfidContext.Nom == "Shields"
-            // select RfidContext.Nom;
-
-
-
-            //var querytestx2 = querytestx.ToList();
-            //var tmpx = querytestx2.Count;
-
-            //var query3 = from Users in _context.Users
-            //where Users.Nom == user.UserName
-            //select Users.Nom;
-
-            //var query4 = query3.ToList();
-            //var tmp4 = query4.Count;
-
-
             
-            
-
 
             var query = from RfidContext in _context.Users
                         where RfidContext.Email == user.UserMail                        
@@ -102,18 +60,6 @@ namespace Rfid.Web.Controllers
             var tmp = query3.ToList();
             var id = tmp[0]; // recuperé l'id pour, plus tars, racueprer les roles associés
 
-            // Implementer l'uitlisation de:
-            //Users mon_user = _context.Users.Find(id);
-
-
-
-
-
-            //var query2 = from RfidContext
-
-            //var innerJoinQuery = from category in categories
-            //join prod in products on category.ID equals prod.CategoryID
-            //select new { ProductName = prod.Name, Category = category.Name };
 
             var query2 = from RfidContext in _context.AppRole
                        join UsersAppRole in _context.UsersAppRole on RfidContext.IdAppRole equals UsersAppRole.IdAppRole
@@ -122,14 +68,7 @@ namespace Rfid.Web.Controllers
 
             var list = query2.ToList();  // recuperre la liste de roles
 
-            /*var query2 = from RfidContext in _context.Users
-                         where RfidContext.Passe == user.Password
-                         select RfidContext.Passe;*/
-
-            //var query2 = from RfidContext in _context.Users
-            //where RfidContext.Passe == user.Password
-            //select RfidContext.Passe;
-
+            
 
             /* ////a remplacer par une requette sur 3 tables
             var query3 = from UserContext in _context.Users
@@ -141,12 +80,7 @@ namespace Rfid.Web.Controllers
             //string role = tmp_role[0];
 
             var username = query.ToList();
-            //var username2 = username[0];
-
-            //var mdp = query2.ToList();
-            //var mdp2 = mdp[0];
-
-            //if (username.Count != 0 && mdp.Count != 0)
+            
 
             var tmp_hashedPassword = query4.ToList();
             var hashedPassword = tmp_hashedPassword[0];
@@ -194,8 +128,8 @@ namespace Rfid.Web.Controllers
             };*/
 
                 var tokeOptions = new JwtSecurityToken(
-                    issuer: "http://localhost:5000",
-                    audience: "http://localhost:5000",
+                    issuer: "http://192.168.1.174:58000",
+                    audience: "http://192.168.1.174:58000",
                     claims: claims2,
                     expires: DateTime.Now.AddDays(1),
                     signingCredentials: signinCredentials
