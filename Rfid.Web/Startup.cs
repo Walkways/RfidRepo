@@ -63,6 +63,9 @@ namespace Rfid.Web
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
                 };
             });
+            services.ConfigureCors();
+
+            services.ConfigureIISIntegration();
 
 
             services.AddMvc()
@@ -127,7 +130,14 @@ namespace Rfid.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.DocExpansion(DocExpansion.None);
             });
+            app.UseHttpsRedirection();
 
+            app.UseCors("CorsPolicy");
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
             app.UseMvc();
         }
         #endregion snippet_Configure
